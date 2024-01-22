@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,9 +19,8 @@ padding:0;
   float: left;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
-  width: 30%;
   overflow: hidden;
-  height:635px;
+  height:640px;
   transition:width 1s;
 
 }
@@ -54,22 +55,25 @@ padding:0;
   float: left;
   
   border: 1px solid #ccc;
-  width: 70%;
+  width: 80%;
   border-left: none;
   overflow-y: scroll !important;
-  height: 635px;
+  height: 640px;
   overflow:hidden;
 }
 .data{
-  display:flex;
+  display:block;
+  text-align: center;
   padding:15px;
 }
 .tab{
   background-color: #303b44;
   color: white;
+  width:20%;
 }
 .tab button{
   color:gray !important;
+  padding:13px;
 }
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -82,14 +86,16 @@ padding:0;
 <div class="tab">
    <?php
    include('db.php');
-   $query="SELECT * FROM users where role ='admin'";
+   if($_SESSION['role'] === 'admin'){
+    $role=$_SESSION['role'];
+   $query="SELECT * FROM users where role ='$role'";
    $result=$con->query($query);
    if($result == true){
     $row=$result->fetch_assoc();
     $name=$row['name'];
     $img=$row['image'];
     echo"
-    <div class=data>
+    <div class=data >
     <img src='$img' width='15%'>
     <h3>$name</h3>
     </div>";
@@ -191,26 +197,33 @@ orders
    <thead>
     <tr>
       <th>Order Id</th>
+      <th>User Name</th>
+      <th>Product Id</th>
       <th>Users Country</th>
       <th>Users City</th>
       <th>Users Adress</th>
       <th>Order time</th>
+    
     </tr>
    </thead>
    <tbody>
    <?php
-   $query="SELECT * FROM orders ";
+   $query="SELECT * FROM orders INNER JOIN users ON orders.userid=users.userid";
    $result=$con->query($query);
    if($result == true ){
     while($row=$result->fetch_assoc()){
       $orderid=$row['orderid'];
+      $username=$row['name'];
       $country=$row['country'];
+      $pid=$row['pid'];
       $city=$row['city'];
       $adress=$row['adress'];
       $ordertime=$row['orderdate'];
       echo"
        <tr>
     <td>$orderid</td>
+    <td>$username</td>
+    <td>$pid</td>
       <td>$country</td>
       <td>$city</td>
       <td>$adress</td>
@@ -242,6 +255,10 @@ function openCity(evt, cityName) {
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 </script>
-   
+   <?php
+   }else{
+    header('Location:privacy');
+   }
+   ?>
 </body>
 </html> 

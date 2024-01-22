@@ -14,48 +14,28 @@
     <style>
         * {
             font-family: "Open Sans", sans-serif;
-        }
-
+            overflow-y:hidden;}
+    
         input {
-            border: none !important;
+            border:1px black solid;
             font-size: 12px !important;
             outline: none !important;
             padding: 0;
             box-shadow: none !important;
+            height:40px !important;
         }
 
         .form-group {
             font-size: 12px;
         }
+
     </style>
 </head>
 
 <body>
-    <div class="container-fluid d-flex p-0">
-        <div class="image" style="width:55%; overflow:hidden;    width:75%;
-    height: 641px;
-    overflow: hidden;
-    background: red;">
-            <img src="IMG/bimg3.jpg" width="100%" style="transform:scale(1.8);margin-top:60px;" alt="">
-        </div>
-        <div class="form" style="width:40%;">
-            <form method="post" style="margin-top:90px; padding:50px;">
-                <p>Log in below:</p>
-
-                <div class="form-group container  " style="border: 2px rgb(28 43 54 / 7%) solid;">
-                    <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder=" Email:" required>
-                </div>
-                <div class="form-group container" style="border: 2px rgb(28 43 54 / 7%) solid;">
-                    <label for="password">Password:</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder=" Password:"
-                        required>
-                </div>
-                <button type="submit" class="btn btn-primary" name="submit">Sign Up</button>
-            </form>
-        </div>
-    </div>
-    <?php
+<?php
+$emailerror="";
+$passworderror="";
     if(empty($email)){
         $error=" <p style='color:red;'>Please Enter Email</p>";
     }else{
@@ -74,18 +54,58 @@
                     $Password = $row['password'];
                     $role = $row['role'];
                     $_SESSION['userid'] = $row['userid'];
-                    $_SESSION['role']=$row['role'];
-                    if ($role === 'admin') {
-                        header("Location:admin.php");
-                    } elseif ($Email == $email && $Password == $password && $role == 'user') {
-                        header("Location:user.php");
-                        exit();
-                    }
+                   if($Email == $email && $Password == $password) {
+                    header("Location:Home");
+                    exit();
                 }
+                    if($Email != $email){
+                   $emailerror="Please Enter Correct Email";
+                    }
+                    if($Password != $password){
+                   $passworderror="Please Enter Correct Password";
+                
             }
         }
     }
+}}
     ?>
+    <div class="container-fluid d-flex p-0 align-items-center " style="height:600px;" >
+     
+        <div class="form d-flex" style="
+        width:55%; 
+        height:400px;
+         margin:auto; 
+         box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        " >
+            <form method="post" style=" padding:43px; width:56%;">
+                <p>Log in below:</p>
+                <div class="form-group container position-relative ">
+                    <label for="email" class="m-0">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder=" Email:" required>
+                    <?php
+                    echo"<span class='text-danger'>".$emailerror."</span>";
+                    ?>
+                </div>
+                <div class="form-group container" >
+                    <label for="password" class="m-0">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder=" Password:"
+                        required>
+                        <?php
+                    echo"<span class='text-danger'>".$passworderror."</span>";
+                    ?>
+                </div>
+                <p>No account <a href="signup.php">Sign Up Here</a></p>
+                <button type="submit" class="btn btn-primary" name="submit">Log In</button>
+              
+            </form>
+            <div class="image" style="   width:47%;
+    height: 641px;
+    overflow: hidden;">
+            <img src="IMG/bimg3.jpg" width="143%" alt="">
+        </div>
+        </div>
+    </div>
+
 
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

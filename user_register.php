@@ -11,9 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $targetDirectory = "uploads/";
     $targetFile = $targetDirectory . basename($_FILES["image"]["name"]);
     $uploadOk = move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile);
-    $cookie_name='user';
-    $cookie_value=$name;
-    setcookie($cookie_name,$cookie_value);
     if ($uploadOk) {
      
         $query = "INSERT INTO users (name, email, password, image) VALUES ('$name', '$email', '$password', '$targetFile')";
@@ -26,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
            $from="Khokhar@gmail.com";
            mail($to,$subject,$messege,$from);
            
-            header("Location: login.php");
+            header("Location:login");
             exit();
         } else {
             echo "Error: " . mysqli_error($con);

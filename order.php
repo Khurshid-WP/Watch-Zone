@@ -2,7 +2,7 @@
 session_start();
     include('db.php');
         $userid=$_SESSION['userid'];
-        $id=$_SESSION['productid'];
+        $id=$_GET['productid'];
       $query="SELECT * FROM products where Productid=$id";
       $result=$con->query($query);
       if($result == true){
@@ -18,23 +18,24 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-      body{
-      background-image:url(<?php echo"$img";?>);
-      background-repeat: no-repeat;
-      background-size:100%;
-      }
 label{
   width:50%;
 padding:13px;
 }
 form{
-  width: 75%;
+  width:100%;
     padding:30px;
-    position: absolute;
-    top: 150px;
     border-radius:7px;
-    right: 171px;
     background-color: white;
+}
+.container .form{
+      top: 100px;
+    position: absolute;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.img{
+  align-items: center;
+    display: flex;
 }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -42,46 +43,18 @@ form{
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
-  <div class="container">
-    <form method="post">
-  <div class="secondrow d-flex">
-    <label for="phone">phone
-    <input class="form-control" type="tel" name="tel" id="name">
-    </label>
-    <label for="country">Select Country
-    <select class="form-control" name="country" id="Country">
-        <option value="Enter Country">Enter Country</option>
-        <option value="PAK">PAKISTAN</option>
-        <option value="INDIA">INDIA</option>
-        <option value="BANGLADESH">BANGLADESH</option>
-     </select>
-     </label>
-    </div>
-    <div class="thirdrow d-flex">
-    <label for="city">Select City
-     <select class="form-control" name="city" id="city">
-     <option class="form-control" value="Enter City">Enter City</option>
-        <option value="Rahim Yar Khan">Rahim Yar Khan</option>
-        <option value="Khan Pur">Khan Pur</option>
-        <option value="Zahir Pir">Zahir Pir</option>
-     </select>
-     </label>
-    <label for="name">Addres
-    <input class="form-control" type="text" name="addres" id="addres">
-    </label>
-  </div>
-  <input class="btn btn-primary" type="submit" name="submit" value="submit">
-    </form>
+  <div class="container align-items-center">
+  
     <?php
     include('db.php');
     if(isset($_POST['submit'])){
-        $name=$_POST['name'];
-        $email=$_POST['email'];
-        $phone=$_POST['tel'];
+      $mobile=$_POST['mobile'];
         $country=$_POST['country'];
         $city=$_POST['city'];
-        $adress=$_POST['addres'];
-        $query="INSERT INTO orders(name,email,phone,country,city,adress,userid)VALUES('$name','$email','$phone','$country','$city','$adress','$userid')";
+        $adress=$_POST['address'];
+        $zipcode=$_POST['zip'];
+        $quantity=1;
+        $query="INSERT INTO orders(country,city,adress,userid,zip,mobile,pid,quantity)VALUES('$country','$city','$adress','$userid','$zipcode','$mobile','$id','$quantity')";
         $result=$con->query($query);
         if($result == true){
           $to=$email;
@@ -89,13 +62,70 @@ form{
           $messege="Thankyou For Ordering";
           $from="kk@gmail.com";
           mail($to , $subject , $messege , $from);
-          header("Location:user.php");
+          header("Location:Home");
         }
         else{
           echo"kk";
         }
     }
     ?>
-    </div>
+    
+    <div class=" form col-md-7 col-lg-10 m-auto d-flex border-1">
+        <form class="needs-validation" method="POST" >
+            <div class="col-12">
+              <label for="mobile-number" class="form-label">Mobile Number</label>
+              <div class="input-group has-validation">
+                <span class="input-group-text">+92</span>
+                <input type="text" class="form-control" id="mobile-number" name="mobile" placeholder="Mobile Number" required>
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="address" class="form-label">Address</label>
+              <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" required>
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+
+            <div class="col-md-5 w-100">
+              <div class="label d-flex">
+              <label for="country" class="form-label">Country</label>
+              <label for="state" class="form-label">City</label>
+              </div>
+          <div class="inputs d-flex">
+              <select class="form-select" id="country" name="country" required>
+                <option value="">Choose...</option>
+                <option  value="Pakistan">Pakistan</option>
+                <option value="India">India</option>
+              </select>
+           
+              <select class="form-select" id="state" name="city" required>
+                <option value="">Choose...</option>
+                <option >Rahim Yar Khan</option>
+                <option>Zahir pir</option>
+                <option>Lahore</option>
+                <option>Karachi</option>
+              </select>
+              </div>
+            </div>
+            <div class="col-md-12">
+            <div class="labels">
+              <label for="zip" class="form-label">Zip</label>
+        </div>
+        <div class="inputs d-flex justify-content-between">
+              <input type="text" class="form- w-50" id="zip" name="zip" placeholder="" required>
+              <div class="invalid-feedback">
+                Zip code required.
+              </div>
+          <button class=" btn btn-outline-danger " name="submit" type="submit">Continue to checkout</button>   
+          <a href="Home" class="btn btn-outline-dark">Back</a>
+            </div>
+            </div>
+            </form>
+            <div class="img">
+              <img src="<?php echo"$img";?>" width="100%" alt="">
+            </div>
+          </div>
+      </div>
 </body>
 </html>
