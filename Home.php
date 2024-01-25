@@ -330,6 +330,59 @@ session_start();
             position: absolute;
             bottom: 2px;
         }
+
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            background: aliceblue !important;
+            right: 0;
+            /* Change left: 0; to right: 0; */
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            margin: 20px 0px 0px 45px;
+            color: black;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: red;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            left: 25px;
+            /* Adjust left position */
+            font-size: 36px;
+            margin-right: 50px;
+            /* Adjust margin-left to margin-right */
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 
@@ -349,7 +402,7 @@ session_start();
                     <span class="toggler-icon bottom-bar "></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="width:68%;">
                         <li class="nav-item fw-medium">
                             <a class="nav-link text-white ef2 " aria-current="page" href="#">Home</a>
                         </li>
@@ -357,7 +410,7 @@ session_start();
                             <a class="nav-link text-white " href="#newarrivals">New Arrivals</a>
                         </li>
                         <li class="nav-item dropdown fw-medium">
-                            <a class="nav-link  text-white" href="#mens"  >
+                            <a class="nav-link  text-white" href="#mens">
                                 Mens
                             </a>
                         </li>
@@ -390,6 +443,7 @@ session_start();
                             $_SESSION['name'] = $row['name'];
                             $_SESSION['role'] = $row['role'];
                             $img = $row['image'];
+                            $_SESSION['userimg'] = $row['image'];
                             $_SESSION['password'] = $row['password'];
                             $_SESSION['image'] = $row['image'];
                         }
@@ -397,32 +451,21 @@ session_start();
                         <div class='user d-flex justify-content-center' style='width:30%;'>
                             <h5 class='text-white' style='padding:10px;'></h5>
                             <div class=' dropdown fw-medium d-flex' style='width:68%;'>
-                                <a class='nav-link dropdown-toggle text-white' href='#' id='navbarDropdown' role='button'
-                                    data-bs-toggle='dropdown' aria-expanded='false'>
-                                    $name
-                                </a>
-                                <div class='img rounded-circle' style='    border: 1px black solid;
-                                width:24%;
+                                <div  class='img rounded-circle' style='    border: 1px black solid;
+                                width:30%;
                                 '>
-                                <img class='rounded-circle' alt='avatar1' width='100%' style='transform:scale(1.4);' src='$img' />
+                                <img onclick='openNav()' class='rounded-circle' alt='avatar1' width='100%' style='transform:scale(1.4);     cursor: pointer;' src='$img' />
                                         </div>
-                                <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>";
-                        if ($_SESSION['role'] == 'admin') {
-                            echo "
-                                    <li><a class='dropdown-item' href='admin.php'>Admin Panel</a></li>
-                                    ";
-                        }
-                        echo "<li><a class='dropdown-item' href='updateid'>Change Profile</a></li>
-                                    <li><a class='dropdown-item' href='user_cart_data'>Your Cart</a></li>
-                                    <li><a class='dropdown-item' href='logout'>Log Out</a></li>
-                                    <li><a class='dropdown-item' href='user_orders'>Orders</a><li>
-                                </ul>
+                             ";
+
+                        echo "
+                            
                             </div>
                         </div>";
                     } else {
                         echo "
                             <div class='btns'>
-                            <a class='btn btn-outline-light border-rounded fw-bold' href='login>
+                            <a class='btn btn-outline-light border-rounded fw-bold' href='login'>
                             Login
                             <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' class='bi bi-box-arrow-in-right' viewBox='0 0 16 16'>
                             <path fill-rule='evenodd' d='M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z'/>
@@ -440,6 +483,27 @@ session_start();
                             ";
                     }
                     ?>
+                    <div id="mySidenav" class="sidenav">
+                        <a style="margin:0px;" href="javascript:void(0)" class="closebtn"
+                            onclick="closeNav()">&times;</a>
+                        <?php
+
+                        echo " <img class='rounded-circle' src='" . $_SESSION['userimg'] . "' style=' border:1px black solid; width:100px;height:100px;margin: auto;
+        display: flex; border-radius: 50px;' alt='Logo'>";
+                        ?>
+                        <a >Khursheed Bilal</a>
+                        <?php if ($_SESSION['role'] == 'admin') {
+                            echo "
+                                <a  href='admin.php'>Admin Panel</a>
+                                    ";
+                        }
+                        ?>
+                        <a href='updateid'>Change Profile</a>
+                        <a href='user_orders'>Orders</a>
+                        <a href='user_cart_data'>Carts</a>
+                        <a href='logout'>Log out</a>
+                    </div>
+                 
                 </div>
 
             </div>
@@ -500,43 +564,43 @@ session_start();
             <button type="button" class="btn btn-danger">Shop Now</button>
         </div>
     </div>
-    <div class="heading" id="mens" >
-    <h3 class="text-center fw-bold" >Men Watches Section</h3>
+    <div class="heading" id="mens">
+        <h3 class="text-center fw-bold">Men Watches Section</h3>
     </div>
     <div class="mens">
-        <h1  class="text-center display-3 fw-bold">Mens Watches</h1>
+        <h1 class="text-center display-3 fw-bold">Mens Watches</h1>
     </div>
     <div class="cards row justify-content-between  m-0 p-0">
-    <?php
-if (isset($_SESSION['userid'])) {
-    $query = "SELECT * FROM products WHERE type = 'mens'";
-    $result = $con->query($query);
+        <?php
+        if (isset($_SESSION['userid'])) {
+            $query = "SELECT * FROM products WHERE type = 'mens'";
+            $result = $con->query($query);
 
-    if ($result == true) {
-        echo "
+            if ($result == true) {
+                echo "
         <div id='productCarousel' class='carousel slide' data-bs-ride='carousel'>
             <div class='carousel-inner'>";
 
-        $products = $result->fetch_all(MYSQLI_ASSOC);
-        $groupedProducts = array_chunk($products, 3); // Group products into sets of three
+                $products = $result->fetch_all(MYSQLI_ASSOC);
+                $groupedProducts = array_chunk($products, 3); // Group products into sets of three
+        
+                foreach ($groupedProducts as $key => $productGroup) {
+                    $activeClass = ($key === 0) ? 'active' : '';
 
-        foreach ($groupedProducts as $key => $productGroup) {
-            $activeClass = ($key === 0) ? 'active' : '';
-
-            echo "
+                    echo "
             <div class='carousel-item $activeClass'>
                 <div class='d-flex justify-content-around'>";
 
-            foreach ($productGroup as $row) {
-                $pname = $row['Productname'];
-                $pmodel = $row['Productmodel'];
-                $img = $row['img'];
-                $price = $row['price'];
-                $productid = $row['Productid'];
-                $_SESSION['pid'] = $row['Productid'];
-                $pid = $_SESSION['pid'];
+                    foreach ($productGroup as $row) {
+                        $pname = $row['Productname'];
+                        $pmodel = $row['Productmodel'];
+                        $img = $row['img'];
+                        $price = $row['price'];
+                        $productid = $row['Productid'];
+                        $_SESSION['pid'] = $row['Productid'];
+                        $pid = $_SESSION['pid'];
 
-                echo "
+                        echo "
                     <div class='card watch-cards p-0 d-block mx-3 my-3 border-1 text-center bg-light' style='width:26%; height: 435px; box-shadow:#abafb4 0px 0px 7px 2px;'>
                         <a href='detail.php?pid=$pid'>
                             <img src='$img' width='80%'>
@@ -557,25 +621,25 @@ if (isset($_SESSION['userid'])) {
                             </a>
                         </div>
                     </div>";
-            }
+                    }
 
-            echo "
+                    echo "
                 </div>
             </div>";
-        }
+                }
 
-        echo "
+                echo "
             </div>
-            <button class='carousel-control-prev' type='button' data-bs-target='#productCarousel' data-bs-slide='prev'>
+            <button class='carousel-control-prev' type='button' style='width:4%;' data-bs-target='#productCarousel' data-bs-slide='prev'>
                 <span class='carousel-control-prev-icon' aria-hidden='true'></span>
                 <span class='visually-hidden'>Previous</span>
             </button>
-            <button class='carousel-control-next' type='button' data-bs-target='#productCarousel' data-bs-slide='next'>
+            <button class='carousel-control-next' type='button' style='width:4%;' data-bs-target='#productCarousel' data-bs-slide='next'>
                 <span class='carousel-control-next-icon' aria-hidden='true'></span>
                 <span class='visually-hidden'>Next</span>
             </button>
         </div>";
-    }
+            }
 
         } else {
             echo "
@@ -613,41 +677,41 @@ if (isset($_SESSION['userid'])) {
 
     </div>
     <div class="womens" id="womens">
-    <h1  class="text-center display-3 fw-bold">
+        <h1 class="text-center display-3 fw-bold">
             Women Watches
         </h1>
     </div>
     <div class="cards row justify-content-between  m-0 p-0">
-    <?php
-if (isset($_SESSION['userid'])) {
-    $query = "SELECT * FROM products WHERE type = 'womens'";
-    $result = $con->query($query);
+        <?php
+        if (isset($_SESSION['userid'])) {
+            $query = "SELECT * FROM products WHERE type = 'womens'";
+            $result = $con->query($query);
 
-    if ($result == true) {
-        echo "
+            if ($result == true) {
+                echo "
         <div id='productCarousel2' class='carousel slide' data-bs-ride='carousel'>
             <div class='carousel-inner'>";
 
-        $products = $result->fetch_all(MYSQLI_ASSOC);
-        $groupedProducts = array_chunk($products, 3); // Group products into sets of three
+                $products = $result->fetch_all(MYSQLI_ASSOC);
+                $groupedProducts = array_chunk($products, 3); // Group products into sets of three
+        
+                foreach ($groupedProducts as $key => $productGroup) {
+                    $activeClass = ($key === 0) ? 'active' : '';
 
-        foreach ($groupedProducts as $key => $productGroup) {
-            $activeClass = ($key === 0) ? 'active' : '';
-
-            echo "
+                    echo "
             <div class='carousel-item $activeClass'>
                 <div class='d-flex justify-content-around'>";
 
-            foreach ($productGroup as $row) {
-                $pname = $row['Productname'];
-                $pmodel = $row['Productmodel'];
-                $img = $row['img'];
-                $price = $row['price'];
-                $productid = $row['Productid'];
-                $_SESSION['pid'] = $row['Productid'];
-                $pid = $_SESSION['pid'];
+                    foreach ($productGroup as $row) {
+                        $pname = $row['Productname'];
+                        $pmodel = $row['Productmodel'];
+                        $img = $row['img'];
+                        $price = $row['price'];
+                        $productid = $row['Productid'];
+                        $_SESSION['pid'] = $row['Productid'];
+                        $pid = $_SESSION['pid'];
 
-                echo "
+                        echo "
                     <div class='card watch-cards p-0 d-block mx-3 my-3 border-1 text-center bg-light' style='width:26%; height: 435px; box-shadow:#abafb4 0px 0px 7px 2px;'>
                         <a href='detail.php?pid=$pid'>
                             <img src='$img' width='80%'>
@@ -668,27 +732,26 @@ if (isset($_SESSION['userid'])) {
                             </a>
                         </div>
                     </div>";
-            }
-            echo "
+                    }
+                    echo "
                 </div>
             </div>";
-        }
+                }
 
-        echo "
+                echo "
             </div>
-            <button class='carousel-control-prev' type='button' data-bs-target='#productCarousel2' data-bs-slide='prev'>
+            <button class='carousel-control-prev' type='button' style='width:4%;' data-bs-target='#productCarousel2' data-bs-slide='prev'>
                 <span class='carousel-control-prev-icon' aria-hidden='true'></span>
                 <span class='visually-hidden'>Previous</span>
             </button>
-            <button class='carousel-control-next' type='button' data-bs-target='#productCarousel2' data-bs-slide='next'>
+            <button class='carousel-control-next' type='button' style='width:4%;' data-bs-target='#productCarousel2' data-bs-slide='next'>
                 <span class='carousel-control-next-icon' aria-hidden='true'></span>
                 <span class='visually-hidden'>Next</span>
             </button>
         </div>";
-    }
-
             }
-        else {
+
+        } else {
             echo "
             <div class='container-fluid m-auto row' style='padding:12px;'>
             <div class='cards row p-0 m-0'>
@@ -721,7 +784,57 @@ if (isset($_SESSION['userid'])) {
         }
 
         ?>
+  <div class="heading">
+    <h1 class="text-center">More Products</h1>
+  </div>
+  <div class="data-by-api d-flex w-100 row" >
+    <?php
+$api_url = 'https://dummyjson.com/products';
 
+$ch = curl_init($api_url);
+
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
+
+$json_data = curl_exec($ch);
+
+if (curl_errno($ch)) {
+    die('Error fetching data from API: ' . curl_error($ch));
+}
+
+curl_close($ch);
+
+$response_data = json_decode($json_data);
+
+if (json_last_error() !== JSON_ERROR_NONE) {
+    die('Error decoding JSON: ' . json_last_error_msg());
+}
+
+if (!property_exists($response_data, 'products')) {
+    die('Error: "products" property not found in JSON');
+}
+
+$product_data = $response_data->products;
+
+$product_data = array_slice($product_data, 0, 9);
+
+foreach ($product_data as $product) {
+    $titles = $product->title;
+    $images = $product->thumbnail;
+    $price = $product->price;
+  echo"<div class='card col-3 p-0' style='margin:20px 55px 10px 55px;'> ";
+    echo '<img src="' . $images . '"  alt="Product Thumbnail">';
+    echo "<br />";
+    echo '<div class="product">';
+    echo "Product Name: " . $titles;
+    echo "<br />";
+    echo "Product Price: $" . $price;
+    echo "<br/>";
+    echo '</div>';
+    echo"</div>";
+}
+?>
+  </div>
     </div>
     <div class="container-fluid bg-light " style=" box-shadow:#abafb4 0px 0px 7px 2px;  ">
         <div class="list-service-footer">
@@ -782,7 +895,13 @@ if (isset($_SESSION['userid'])) {
                 }
             });
         });
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "26%";
+        }
 
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
     </script>
 </body>
 

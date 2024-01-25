@@ -52,7 +52,8 @@ $passworderror="";
                 while ($row = $result->fetch_assoc()) {
                     $Email = $row['email'];
                     $Password = $row['password'];
-                    $role = $row['role'];
+                    $role = $row['role'];  
+                    $_SESSION['role'] = $row['role'];
                     $_SESSION['userid'] = $row['userid'];
                    if($Email == $email && $Password == $password) {
                     header("Location:Home");

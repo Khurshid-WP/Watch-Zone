@@ -42,7 +42,7 @@ include('db.php');
                         echo '<td><img src="' . $key['product_image'] . '" alt="Product Image" style="width:50px;height:50px;"></td>';
                         echo '<td><input type="number" value="' . $key['product_quantity'] . '" style="width:30%;" oninput="updateTotal(this, ' . $key['product_price'] . ',' . $key['product_id'] . ');"></td>';
                         echo '<td><span id="priceHint_' . $key['product_id'] . '">' . ($key['product_quantity'] * $key['product_price'])  .'</span>PKR</td>';
-                        echo"<td><a class='btn btn-outline-danger' href='cart_delete.php?id=$productid'>Delete</a></td>";
+                        echo"<td><a class='btn btn-outline-danger' href='cart_delete.php?pid=".$key['product_id']."'>Delete</a></td>";
                         echo '</tr>';
                     }
                 } 
