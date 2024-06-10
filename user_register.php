@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include("db.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -7,7 +7,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $email = $_POST["email"];
     $password =$_POST["password"];
-
     $targetDirectory = "uploads/";
     $targetFile = $targetDirectory . basename($_FILES["image"]["name"]);
     $uploadOk = move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile);

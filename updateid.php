@@ -68,7 +68,7 @@ include('db.php');
         <input type="file" name="image">
         </div>
         <button type="submit" class="btn btn-primary" name="submit">submit</button>
-        <a href="Home" class="btn btn-outline-dark">Back</a>
+        <a href="./" class="btn btn-outline-dark">Back</a>
     </form>
 <div class="img rounded-circle border-1">
         <img src="<?php echo $_SESSION['image']; ?>" width="100%" alt="">
@@ -88,7 +88,7 @@ include('db.php');
             $result = $con->query($query);
 
             if ($result) {
-                header('Location:Home');
+                header('Location:./');
             }
         }
     

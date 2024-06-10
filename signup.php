@@ -30,15 +30,14 @@
  
 
 
-<div class="form d-flex position-absolute" style="
-top:70px;
-left:200px;
+<div class="form d-flex row" style="
         width:70%; 
+        margin-top:65px !important;
         height:500px;
          margin:auto; 
          box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
         " >
-        <form action="user_register.php" method="post" enctype="multipart/form-data" style=" padding:30px; width:56%;">
+        <form class="col-lg-6 col-sm-6 col-md-12" action="user_register.php" method="post" enctype="multipart/form-data" style=" padding:30px; ">
           <p>SignUp below:</p>
             <div class="form-group container" >
                 <label for="name">Name:</label>
@@ -59,9 +58,9 @@ left:200px;
             <button type="submit" class="btn btn-primary">Sign Up</button>
             <span>Already Has an account <a href="login.php">Login Here</a></span>
         </form>
-        <div class="image" style="   width:47%;
+        <div class="image col-6" style="   width:47%;
     height: 641px;
-    overflow: hidden;">
+ ">
             <img src="IMG/bimg3.jpg" width="143%" alt="">
         </div>
     </div>

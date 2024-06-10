@@ -15,7 +15,7 @@
 <body>
     <div class="container">
         <h1 class="display-1 text-center">Your Orders</h1>
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
                 <th>Order No</th>
                 <th>Product Name</th>
@@ -55,7 +55,7 @@
     </div>';
                 } else {
                     echo '<div class="alert alert-warning" role="alert">
-                    This is a warning alert—check it out!
+                   There are no orders
                   </div>';
                 }
 
