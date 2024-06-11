@@ -598,18 +598,10 @@ session_start();
                             $_SESSION['name'] = $row['name'];
                             $_SESSION['role'] = $row['role'];
                             $img = $row['image'];
-                            $seller=$row['seller'];
-                            $_SESSION['seller'] = $row['seller'];
                             $_SESSION['userimg'] = $row['image'];
                             $_SESSION['password'] = $row['password'];
                             $_SESSION['image'] = $row['image'];
                         }
-                        $query="SELECT status FROM users where userid = $id";
-                        $result=$con->query($query);
-                        if($result){
-                            $row=$result->fetch_assoc();
-                            $status=$row["status"];
-                            $_SESSION['subscribe'] = $row['status'];
                        echo" <div class='user d-flex justify-content-center' style='width:30%;'>
                             <h5 class='text-white' style='padding:10px;'></h5>
                             <div class='icon-wrap'>
@@ -621,7 +613,7 @@ session_start();
                             </div>
                         </div>";
                   }  
-                }else {
+                else {
                         echo "
                             <div class='btns'>
                             <a class='btn btn-outline-light border-rounded fw-bold' href='login'>

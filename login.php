@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,8 +47,8 @@
                 <div class="form-group container">
                     <label for="password" class="m-0">Password:</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder=" Password:" required>
-
                 </div>
+              
                 <p>No account <a href="signup.php">Sign Up Here</a></p>
                 <button type="submit" class="btn btn-primary" name="submit">Log In</button>
 
@@ -66,6 +67,7 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $_SESSION['email'] = $email;
     $password = $_POST['password'];
+    $_SESSION['inputpass'] = $password;
     include('db.php');
 
     $query = "SELECT * FROM users WHERE email='$email'";
@@ -78,10 +80,25 @@ if (isset($_POST['submit'])) {
         $Password = $row['password'];
         $role = $row['role'];
         $_SESSION['userid'] = $userid; 
-       
+        if( $Password ===  $_SESSION['inputpass']){
+            echo $password;
         header('Location:./');
+        }else{
+            echo '
+                    <div class="alert alert-danger" style="    position: absolute;
+    top: 0px;
+    width: 50% !important;
+    margin: auto;
+    left: 336px;"  role="alert">
+            Incorrect pass or email
+            </div>
+            ';
+        }
+
     } else {
-        echo 'error';
+        echo '
+        alertError while logging in
+';
     }
 }
 ?>
