@@ -22,5 +22,5 @@ $cartArray = array(
     'product_quantity' => 1 
 );
 $_SESSION['cart_items'][] = $cartArray;
-header('location: user_cart_data');
+header('location: user_cart_data.php');
 ?>

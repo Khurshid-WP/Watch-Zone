@@ -289,7 +289,7 @@ if ($result == true) {
                             <h4 class="box-title mt-5">Product description</h4>
                             <p><?php echo$description;?></p>
                             <h2 class="mt-5"> <?php echo"$".$price;?><small class="text-success">(36%off)</small></h2><?php echo ' <a 
-                                href="../cart_process?id='.$pid.'"class="btn btn-dark btn-rounded mr-1" data-toggle="tooltip" title
+                                href="../cart_process.php?id='.$pid.'"class="btn btn-dark btn-rounded mr-1" data-toggle="tooltip" title
                                 data-original-title="Add to cart"> <i style="font-size:15px;" class="fa fa-shopping-cart"></i> </a><a
                                 href="../order.php?productid='.$pid.' "
                                 class="btn btn-primary btn-rounded">Buy Now</a>';?>

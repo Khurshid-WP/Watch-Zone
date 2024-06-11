@@ -616,14 +616,14 @@ session_start();
                 else {
                         echo "
                             <div class='btns'>
-                            <a class='btn btn-outline-light border-rounded fw-bold' href='login'>
+                            <a class='btn btn-outline-light border-rounded fw-bold' href='login.php'>
                             Login
                             <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' class='bi bi-box-arrow-in-right' viewBox='0 0 16 16'>
                             <path fill-rule='evenodd' d='M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z'/>
                             <path fill-rule='evenodd' d='M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z'/>
                           </svg>
                             </a>
-                            <a class='btn btn-outline-light border-rounded fw-bold' href='Signup'>
+                            <a class='btn btn-outline-light border-rounded fw-bold' href='Signup.php'>
                                 Sign Up
                                 <svg xmlns='http://www.w3.org/2000/svg' width='20' height='16' fill='currentColor' class='bi bi-person-add' viewBox='0 0 16 16'>
   <path d='M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4'/>
@@ -655,10 +655,10 @@ session_start();
                             <div id="caption"></div>
                         </div>
 
-                        <a href='updateid'>Change Profile</a>
-                        <a href='user_orders'>Orders</a>
-                        <a href='user_cart_data'>Carts</a>
-                        <a href='logout'>Log out</a>
+                        <a href='updateid.php'>Change Profile</a>
+                        <a href='user_orders.php'>Orders</a>
+                        <a href='user_cart_data.php'>Carts</a>
+                        <a href='logout.php'>Log out</a>
                     </div>
 
                 </div>
@@ -802,24 +802,24 @@ session_start();
                     <img src='IMG/new1.jpg' width='100%'>
                     <div class='data'>
                         <h5>Product: Apple X Watch</h5>
-                        <a href='signup' class='btn btn-outline-danger btn-sm'>Order Now</a>
-                        <a href='signup' class='btn btn-outline-danger btn-sm'>Add to Cart</a>
+                        <a href='signup.php' class='btn btn-outline-danger btn-sm'>Order Now</a>
+                        <a href='signup.php' class='btn btn-outline-danger btn-sm'>Add to Cart</a>
                     </div>
                 </div>
                 <div class='newcards col-4 p-0 d-block' style='width:31%;'>
                     <img src='IMG/new2.jpg' width='100%'>
                     <div class='data'>
                         <h5>Product: Apple X Watch</h5>
-                        <a href='signup' class='btn btn-outline-danger btn-sm'>Order Now</a>
-                        <a href='signup' class='btn btn-outline-danger btn-sm'>Add to Cart</a>
+                        <a href='signup.php' class='btn btn-outline-danger btn-sm'>Order Now</a>
+                        <a href='signup.php' class='btn btn-outline-danger btn-sm'>Add to Cart</a>
                     </div>
                 </div>
                 <div class='newcards col-4 p-0 d-block' style='width:31%;'>
                     <img src='IMG/new3.jpg' width='100%' >
                     <div class='data'>
                         <h5>Product: Apple X Watch</h5>
-                        <a href='signup' class='btn btn-outline-danger btn-sm'>Order Now</a>
-                        <a href='signup' class='btn btn-outline-danger btn-sm'>Add to Cart</a>                    </div>
+                        <a href='signup.php' class='btn btn-outline-danger btn-sm'>Order Now</a>
+                        <a href='signup.php' class='btn btn-outline-danger btn-sm'>Add to Cart</a>                    </div>
                 </div>
             </div>
 
