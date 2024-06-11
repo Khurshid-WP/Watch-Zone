@@ -97,7 +97,13 @@ if (isset($_POST['submit'])) {
 
     } else {
         echo '
-        alertError while logging in
+        <div class="alert alert-danger" style="    position: absolute;
+top: 0px;
+width: 50% !important;
+margin: auto;
+left: 336px;"  role="alert">
+Incorrect pass or email
+</div>
 ';
     }
 }
